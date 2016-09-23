@@ -1,0 +1,21 @@
+# 一行の文字列制限変更(default: 100)
+# defaultだとAppDelegateのコメントが長くて警告が出る
+line_length: 300
+
+included: # paths to include during linting. `--path` is ignored if present.
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Carthage
+
+opt_in_rules:
+  - empty_count
+
+disabled_rules:
+  - todo
+  - force_try
+  - force_cast
+
+variable_name:
+  excluded: # excluded via string array
+    - id
+    - URL
