@@ -48,7 +48,19 @@ class TableViewController: UITableViewController, ManagerDelegate {
         }
 
         let indexString = String(format: "%03d", infoArray.count - indexPath.row)
-        cell.textLabel!.text = "\(indexString)\n\(info.description)"
+
+        let formatter = DateFormatter()
+        formatter.locale     = Locale.autoupdatingCurrent
+        formatter.dateFormat = "MM/dd HH:mm:ss"
+        let dateString = formatter.string(from: Date())
+
+        let firstLine = "\(indexString): \(dateString)"
+        let attrText = NSMutableAttributedString(string: "\(firstLine)\n\(info.description)")
+        let attr = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 17)]
+        let range = _NSRange(location: 0, length: firstLine.characters.count)
+        attrText.setAttributes(attr, range: range)
+
+        cell.textLabel!.attributedText = attrText
         // storyboard からの指定で効かないためコードで指定
         cell.textLabel!.numberOfLines = 0
         cell.textLabel!.lineBreakMode = .byWordWrapping
