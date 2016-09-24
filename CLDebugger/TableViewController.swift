@@ -10,21 +10,21 @@ import UIKit
 
 class TableViewController: UITableViewController, ManagerDelegate {
 
-    private var infoArray = [LocationInfo]()
+    private var infoArray = [Info]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        Manager.sharedInstance.delegate = self
         Manager.sharedInstance.requestAlwaysAuthorization(Prefix.locationInfoType)
         Manager.sharedInstance.start(Prefix.locationInfoType)
-        Manager.sharedInstance.delegate = self
 
         tableView.tableFooterView = UIView() // delete separaters between empty cells
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
     }
 
-    func manager(_ manager: Manager, didUpdateInfo locationInfo: LocationInfo) {
-        infoArray.insert(locationInfo, at: 0)
+    func manager(_ manager: Manager, didUpdateInfo info: Info) {
+        infoArray.insert(info, at: 0)
         tableView.beginUpdates()
         tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
         tableView.endUpdates()
@@ -42,7 +42,9 @@ class TableViewController: UITableViewController, ManagerDelegate {
         case .success:
             cell.backgroundColor = UIColor.white
         case .failer:
-            cell.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            cell.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+        case .status:
+            cell.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 1, alpha: 1)
         }
 
         let indexString = String(format: "%03d", infoArray.count - indexPath.row)

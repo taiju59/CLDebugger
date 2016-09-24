@@ -9,5 +9,5 @@
 import Foundation
 
 class Prefix {
-    static let locationInfoType: LocationInfoType = .standard
+    static let locationInfoType: LocationInfoType = .visit
 }

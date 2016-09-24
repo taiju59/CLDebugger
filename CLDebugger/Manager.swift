@@ -11,18 +11,20 @@ import CoreLocation
 
 enum LocationInfoType: Int {
     case standard = 0
+    case visit = 1
 }
 
 enum EventType: Int {
     case success = 0
     case failer = 1
+    case status = 2
 }
 
-struct LocationInfo {
-    let locationInfoType: LocationInfoType
+struct Info {
+    let locationInfoType: LocationInfoType?
     let event: EventType
     let description: String
-    init(_ locationInfoType: LocationInfoType, event: EventType, description: String) {
+    init(_ locationInfoType: LocationInfoType?, event: EventType, description: String) {
         self.locationInfoType = locationInfoType
         self.event = event
         self.description = description
@@ -30,10 +32,10 @@ struct LocationInfo {
 }
 
 protocol ManagerDelegate: class {
-    func manager(_ manager: Manager, didUpdateInfo locationInfo: LocationInfo)
+    func manager(_ manager: Manager, didUpdateInfo locationInfo: Info)
 }
 
-class Manager: NSObject, StandardDelegate {
+class Manager: NSObject, StandardDelegate, VisitMonitoringDelegate {
 
     static let sharedInstance = Manager()
 
@@ -42,44 +44,91 @@ class Manager: NSObject, StandardDelegate {
     override private init() {
         super.init()
         Standard.sharedInstance.delegate = self
+        VisitMonitoring.sharedInstance.delegate = self
     }
 
+    // MARK: - Status Change Event
     func requestAlwaysAuthorization(_ type: LocationInfoType) {
+        let info: Info
         switch type {
         case .standard:
             Standard.sharedInstance.requestAlwaysAuthorization()
+            info = Info(type, event: .status, description: "standard requestAlwaysAuthorization")
+        case .visit:
+            VisitMonitoring.sharedInstance.requestAlwaysAuthorization()
+            info = Info(type, event: .status, description: "visit requestAlwaysAuthorization")
         }
+        delegate?.manager(self, didUpdateInfo: info)
     }
 
     func requestWhenInUseAuthorization(_ type: LocationInfoType) {
+        let info: Info
         switch type {
         case .standard:
             Standard.sharedInstance.requestWhenInUseAuthorization()
+            info = Info(type, event: .status, description: "standard requestWhenInUseAuthorization")
+        case .visit:
+            VisitMonitoring.sharedInstance.requestWhenInUseAuthorization()
+            info = Info(type, event: .status, description: "visit requestWhenInUseAuthorization")
         }
+        delegate?.manager(self, didUpdateInfo: info)
     }
 
     func start(_ type: LocationInfoType) {
+        let info: Info
         switch type {
         case .standard:
             Standard.sharedInstance.start()
+            info = Info(type, event: .status, description: "standard start")
+        case .visit:
+            VisitMonitoring.sharedInstance.start()
+            info = Info(type, event: .status, description: "visit start")
         }
+        delegate?.manager(self, didUpdateInfo: info)
     }
 
     func stop(_ type: LocationInfoType) {
+        let info: Info
         switch type {
         case .standard:
             Standard.sharedInstance.stop()
+            info = Info(type, event: .status, description: "standard stop")
+        case .visit:
+            VisitMonitoring.sharedInstance.stop()
+            info = Info(type, event: .status, description: "visit stop")
         }
+        delegate?.manager(self, didUpdateInfo: info)
     }
 
+    func visitMonitoring(_ visitMonitoring: VisitMonitoring, didPauseLocationUpdates manager: CLLocationManager) {
+        let info = Info(.visit, event: .status, description: "visit didPauseLocationUpdates")
+        delegate?.manager(self, didUpdateInfo: info)
+    }
+
+    func visitMonitoring(_ visitMonitoring: VisitMonitoring, didResumeLocationUpdates manager: CLLocationManager) {
+        let info = Info(.visit, event: .status, description: "visit didResumeLocationUpdates")
+        delegate?.manager(self, didUpdateInfo: info)
+    }
+
+    func visitMonitoring(_ visitMonitoring: VisitMonitoring, manager: CLLocationManager, didFinishDeferredUpdatesWithError error: Error?) {
+        let info = Info(.visit, event: .status, description: "visit didFinishDeferredUpdatesWithError")
+        delegate?.manager(self, didUpdateInfo: info)
+    }
+
+    func visitMonitoring(_ visitMonitoring: VisitMonitoring, manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        let info = Info(.visit, event: .status, description: "visit didChangeAuthorization\nstatus: \(getAuthorizationStatus(status))")
+        delegate?.manager(self, didUpdateInfo: info)
+    }
+
+    // MARK: - Location Event
     func success(_ type: LocationInfoType, description: String) {
-        let locationInfo = LocationInfo(type, event: .success, description: description)
-        delegate?.manager(self, didUpdateInfo: locationInfo)
+        let info = Info(type, event: .success, description: description)
+        delegate?.manager(self, didUpdateInfo: info)
     }
 
     func failer(_ type: LocationInfoType, description: String) {
-        let locationInfo = LocationInfo(type, event: .failer, description: description)
-        delegate?.manager(self, didUpdateInfo: locationInfo)
+        let info = Info(type, event: .failer, description: description)
+        delegate?.manager(self, didUpdateInfo: info)
     }
 
     func standard(_ standard: Standard, manager: CLLocationManager, didUpdateLocation locations: [CLLocation]) {
@@ -94,21 +143,17 @@ class Manager: NSObject, StandardDelegate {
         failer(.standard, description: "error: \(error.localizedDescription)")
     }
 
+    func visitMonitoring(_ visitMonitoring: VisitMonitoring, manager: CLLocationManager, didVisit visit: CLVisit) {
+        let visitInfoStr = getVisitInfoStr(visit)
+        let managerInfoStr = getManagerInfoStr(manager)
+        let description = "**visit info**\n\(visitInfoStr)\n**manager info**\n\(managerInfoStr)"
+
+        success(.visit, description: description)
+    }
+
     private func getManagerInfoStr(_ manager: CLLocationManager) -> String {
 
-        let authorizationStatus: String
-        switch CLLocationManager.authorizationStatus() {
-        case .authorizedAlways:
-            authorizationStatus = "authorizedAlways"
-        case .authorizedWhenInUse:
-            authorizationStatus = "authorizedWhenInUse"
-        case .denied:
-            authorizationStatus = "denied"
-        case .notDetermined:
-            authorizationStatus = "notDetermined"
-        case .restricted:
-            authorizationStatus = "restricted"
-        }
+        let authorizationStatus = getAuthorizationStatus(CLLocationManager.authorizationStatus())
 
         let desiredAccuracy: String
         switch manager.desiredAccuracy {
@@ -135,7 +180,7 @@ class Manager: NSObject, StandardDelegate {
         managerInfo.append("pausesLocationUpdatesAutomatically: \(manager.pausesLocationUpdatesAutomatically)")
         managerInfo.append("allowsBackgroundLocationUpdates: \(manager.allowsBackgroundLocationUpdates)")
 
-        return managerInfo.joined(separator: "")
+        return managerInfo.joined(separator: "\n")
     }
 
     private func getLocationInfoStr(_ location: CLLocation) -> String {
@@ -144,8 +189,34 @@ class Manager: NSObject, StandardDelegate {
         locationInfo.append("lon: \(location.coordinate.longitude)")
         locationInfo.append("timestamp: \(location.timestamp)")
         locationInfo.append("altitude: \(location.altitude)")
+        locationInfo.append("horizontalAccuracy: \(location.horizontalAccuracy)")
 
-        return locationInfo.joined(separator: "")
+        return locationInfo.joined(separator: "\n")
     }
 
+    private func getVisitInfoStr(_ visit: CLVisit) -> String {
+        var visitInfo = [String]()
+        visitInfo.append("lat: \(visit.coordinate.latitude)")
+        visitInfo.append("lon: \(visit.coordinate.longitude)")
+        visitInfo.append("arrivalDate: \(visit.arrivalDate)")
+        visitInfo.append("departureDate: \(visit.departureDate)")
+        visitInfo.append("horizontalAccuracy: \(visit.horizontalAccuracy)")
+
+        return visitInfo.joined(separator: "\n")
+    }
+
+    private func getAuthorizationStatus(_ status: CLAuthorizationStatus) -> String {
+        switch status {
+        case .authorizedAlways:
+            return "authorizedAlways"
+        case .authorizedWhenInUse:
+            return "authorizedWhenInUse"
+        case .denied:
+            return "denied"
+        case .notDetermined:
+            return "notDetermined"
+        case .restricted:
+            return "restricted"
+        }
+    }
 }
