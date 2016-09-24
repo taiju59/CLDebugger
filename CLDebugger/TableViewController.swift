@@ -56,5 +56,9 @@ class TableViewController: UITableViewController, ManagerDelegate {
         return cell
     }
 
+    @IBAction func deleteAll(_ sender: UIBarButtonItem) {
+        infoArray = []
+        tableView.reloadData()
+    }
 
 }

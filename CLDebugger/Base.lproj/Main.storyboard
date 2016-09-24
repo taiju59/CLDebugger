@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hjB-Va-DR0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6Ba-kb-ku0">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -16,7 +16,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Basic" textLabel="l7u-f2-pud" rowHeight="144" style="IBUITableViewCellStyleDefault" id="Abl-7T-9gv">
-                                <rect key="frame" x="0.0" y="28" width="375" height="144"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Abl-7T-9gv" id="b8i-cc-sd6">
                                     <frame key="frameInset" width="375" height="143"/>
@@ -39,8 +39,33 @@
                             <outlet property="delegate" destination="hjB-Va-DR0" id="gvb-H6-oXq"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="nB8-93-Tv6">
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="e0r-47-y31">
+                            <connections>
+                                <action selector="deleteAll:" destination="hjB-Va-DR0" id="m92-RZ-qPj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tpj-XJ-cIh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1016.8" y="45.42728635682159"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="1Ah-kM-1XD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Ba-kb-ku0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ib8-td-Qkf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hjB-Va-DR0" kind="relationship" relationship="rootViewController" id="Ojh-Nf-Bf1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="715-gb-PP7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="77.599999999999994" y="45.42728635682159"/>
         </scene>
