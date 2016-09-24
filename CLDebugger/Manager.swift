@@ -13,9 +13,31 @@ enum LocationInfoType: Int {
     case standard = 0
 }
 
+enum EventType: Int {
+    case success = 0
+    case failer = 1
+}
+
+struct LocationInfo {
+    let locationInfoType: LocationInfoType
+    let event: EventType
+    let description: String
+    init(_ locationInfoType: LocationInfoType, event: EventType, description: String) {
+        self.locationInfoType = locationInfoType
+        self.event = event
+        self.description = description
+    }
+}
+
+protocol ManagerDelegate: class {
+    func manager(_ manager: Manager, didUpdateInfo locationInfo: LocationInfo)
+}
+
 class Manager: NSObject, StandardDelegate {
 
     static let sharedInstance = Manager()
+
+    weak var delegate: ManagerDelegate?
 
     override private init() {
         super.init()
@@ -51,15 +73,13 @@ class Manager: NSObject, StandardDelegate {
     }
 
     func success(_ type: LocationInfoType, description: String) {
-        print("-----success-----")
-        print(description)
-        print("----------")
+        let locationInfo = LocationInfo(type, event: .success, description: description)
+        delegate?.manager(self, didUpdateInfo: locationInfo)
     }
 
     func failer(_ type: LocationInfoType, description: String) {
-        print("-----failer-----")
-        print(description)
-        print("----------")
+        let locationInfo = LocationInfo(type, event: .failer, description: description)
+        delegate?.manager(self, didUpdateInfo: locationInfo)
     }
 
     func standard(_ standard: Standard, manager: CLLocationManager, didUpdateLocation locations: [CLLocation]) {
@@ -115,7 +135,7 @@ class Manager: NSObject, StandardDelegate {
         managerInfo.append("pausesLocationUpdatesAutomatically: \(manager.pausesLocationUpdatesAutomatically)")
         managerInfo.append("allowsBackgroundLocationUpdates: \(manager.allowsBackgroundLocationUpdates)")
 
-        return managerInfo.joined(separator: "\n")
+        return managerInfo.joined(separator: "")
     }
 
     private func getLocationInfoStr(_ location: CLLocation) -> String {
@@ -125,7 +145,7 @@ class Manager: NSObject, StandardDelegate {
         locationInfo.append("timestamp: \(location.timestamp)")
         locationInfo.append("altitude: \(location.altitude)")
 
-        return locationInfo.joined(separator: "\n")
+        return locationInfo.joined(separator: "")
     }
 
 }

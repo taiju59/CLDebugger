@@ -14,7 +14,7 @@
 		ED14FE4C1D94DA3F006455AB /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED14FE4A1D94DA3F006455AB /* Realm.framework */; };
 		ED14FE4D1D94DA3F006455AB /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED14FE4B1D94DA3F006455AB /* RealmSwift.framework */; };
 		EDBFB4821D94D1F0004D9128 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFB4811D94D1F0004D9128 /* AppDelegate.swift */; };
-		EDBFB4841D94D1F0004D9128 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFB4831D94D1F0004D9128 /* ViewController.swift */; };
+		EDBFB4841D94D1F0004D9128 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFB4831D94D1F0004D9128 /* TableViewController.swift */; };
 		EDBFB4871D94D1F0004D9128 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBFB4851D94D1F0004D9128 /* Main.storyboard */; };
 		EDBFB4891D94D1F0004D9128 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDBFB4881D94D1F0004D9128 /* Assets.xcassets */; };
 		EDBFB48C1D94D1F0004D9128 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBFB48A1D94D1F0004D9128 /* LaunchScreen.storyboard */; };
@@ -29,7 +29,7 @@
 		ED14FE4B1D94DA3F006455AB /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		EDBFB47E1D94D1F0004D9128 /* CLDebugger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLDebugger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBFB4811D94D1F0004D9128 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EDBFB4831D94D1F0004D9128 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EDBFB4831D94D1F0004D9128 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		EDBFB4861D94D1F0004D9128 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EDBFB4881D94D1F0004D9128 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDBFB48B1D94D1F0004D9128 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 			children = (
 				ED0BDD831D94E6F200366F17 /* models */,
 				EDBFB4811D94D1F0004D9128 /* AppDelegate.swift */,
-				EDBFB4831D94D1F0004D9128 /* ViewController.swift */,
+				EDBFB4831D94D1F0004D9128 /* TableViewController.swift */,
 				EDBFB4851D94D1F0004D9128 /* Main.storyboard */,
 				EDBFB4881D94D1F0004D9128 /* Assets.xcassets */,
 				EDBFB48A1D94D1F0004D9128 /* LaunchScreen.storyboard */,
@@ -200,7 +200,7 @@
 			files = (
 				ED0BDD871D951A0A00366F17 /* Manager.swift in Sources */,
 				ED0BDD851D94E70400366F17 /* Standard.swift in Sources */,
-				EDBFB4841D94D1F0004D9128 /* ViewController.swift in Sources */,
+				EDBFB4841D94D1F0004D9128 /* TableViewController.swift in Sources */,
 				EDBFB4821D94D1F0004D9128 /* AppDelegate.swift in Sources */,
 				ED0BDD891D951AD500366F17 /* Prefix.swift in Sources */,
 			);
