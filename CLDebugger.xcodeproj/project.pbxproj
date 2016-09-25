@@ -13,8 +13,10 @@
 		ED0BDD891D951AD500366F17 /* Prefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0BDD881D951AD500366F17 /* Prefix.swift */; };
 		ED14FE4C1D94DA3F006455AB /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED14FE4A1D94DA3F006455AB /* Realm.framework */; };
 		ED14FE4D1D94DA3F006455AB /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED14FE4B1D94DA3F006455AB /* RealmSwift.framework */; };
+		ED2E6BE71D97F482005AF3A5 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E6BE61D97F482005AF3A5 /* InfoCell.swift */; };
+		ED2E6BE91D97F852005AF3A5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2E6BE81D97F852005AF3A5 /* MapKit.framework */; };
 		EDBFB4821D94D1F0004D9128 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFB4811D94D1F0004D9128 /* AppDelegate.swift */; };
-		EDBFB4841D94D1F0004D9128 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFB4831D94D1F0004D9128 /* TableViewController.swift */; };
+		EDBFB4841D94D1F0004D9128 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFB4831D94D1F0004D9128 /* ViewController.swift */; };
 		EDBFB4871D94D1F0004D9128 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBFB4851D94D1F0004D9128 /* Main.storyboard */; };
 		EDBFB4891D94D1F0004D9128 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDBFB4881D94D1F0004D9128 /* Assets.xcassets */; };
 		EDBFB48C1D94D1F0004D9128 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBFB48A1D94D1F0004D9128 /* LaunchScreen.storyboard */; };
@@ -28,9 +30,11 @@
 		ED0BDD881D951AD500366F17 /* Prefix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefix.swift; sourceTree = "<group>"; };
 		ED14FE4A1D94DA3F006455AB /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		ED14FE4B1D94DA3F006455AB /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		ED2E6BE61D97F482005AF3A5 /* InfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
+		ED2E6BE81D97F852005AF3A5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		EDBFB47E1D94D1F0004D9128 /* CLDebugger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLDebugger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBFB4811D94D1F0004D9128 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EDBFB4831D94D1F0004D9128 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		EDBFB4831D94D1F0004D9128 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EDBFB4861D94D1F0004D9128 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EDBFB4881D94D1F0004D9128 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDBFB48B1D94D1F0004D9128 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -45,6 +49,7 @@
 			files = (
 				ED0BDD821D94E48100366F17 /* CoreLocation.framework in Frameworks */,
 				ED14FE4C1D94DA3F006455AB /* Realm.framework in Frameworks */,
+				ED2E6BE91D97F852005AF3A5 /* MapKit.framework in Frameworks */,
 				ED14FE4D1D94DA3F006455AB /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,11 +71,28 @@
 		ED14FE491D94DA3F006455AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ED2E6BE81D97F852005AF3A5 /* MapKit.framework */,
 				ED0BDD811D94E48100366F17 /* CoreLocation.framework */,
 				ED14FE4A1D94DA3F006455AB /* Realm.framework */,
 				ED14FE4B1D94DA3F006455AB /* RealmSwift.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ED2E6BE41D97F431005AF3A5 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				ED2E6BE61D97F482005AF3A5 /* InfoCell.swift */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		ED2E6BE51D97F43B005AF3A5 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EDBFB4831D94D1F0004D9128 /* ViewController.swift */,
+			);
+			name = controllers;
 			sourceTree = "<group>";
 		};
 		EDBFB4751D94D1F0004D9128 = {
@@ -94,8 +116,9 @@
 			isa = PBXGroup;
 			children = (
 				ED0BDD831D94E6F200366F17 /* models */,
+				ED2E6BE41D97F431005AF3A5 /* views */,
+				ED2E6BE51D97F43B005AF3A5 /* controllers */,
 				EDBFB4811D94D1F0004D9128 /* AppDelegate.swift */,
-				EDBFB4831D94D1F0004D9128 /* TableViewController.swift */,
 				EDBFB4851D94D1F0004D9128 /* Main.storyboard */,
 				EDBFB4881D94D1F0004D9128 /* Assets.xcassets */,
 				EDBFB48A1D94D1F0004D9128 /* LaunchScreen.storyboard */,
@@ -141,6 +164,9 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
 						};
@@ -203,10 +229,11 @@
 			files = (
 				ED0BDD871D951A0A00366F17 /* Manager.swift in Sources */,
 				ED0BDD851D94E70400366F17 /* Standard.swift in Sources */,
-				EDBFB4841D94D1F0004D9128 /* TableViewController.swift in Sources */,
+				EDBFB4841D94D1F0004D9128 /* ViewController.swift in Sources */,
 				EDBFB4821D94D1F0004D9128 /* AppDelegate.swift in Sources */,
 				ED0BDD891D951AD500366F17 /* Prefix.swift in Sources */,
 				EDCC484F1D96466F006A4820 /* VisitMonitoring.swift in Sources */,
+				ED2E6BE71D97F482005AF3A5 /* InfoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

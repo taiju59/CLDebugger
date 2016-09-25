@@ -23,10 +23,12 @@ enum EventType: Int {
 struct Info {
     let locationInfoType: LocationInfoType?
     let event: EventType
+    let location: CLLocationCoordinate2D?
     let description: String
-    init(_ locationInfoType: LocationInfoType?, event: EventType, description: String) {
+    init(_ locationInfoType: LocationInfoType? = nil, event: EventType, location: CLLocationCoordinate2D? = nil, description: String) {
         self.locationInfoType = locationInfoType
         self.event = event
+        self.location = location
         self.description = description
     }
 }
@@ -121,8 +123,8 @@ class Manager: NSObject, StandardDelegate, VisitMonitoringDelegate {
     }
 
     // MARK: - Location Event
-    func success(_ type: LocationInfoType, description: String) {
-        let info = Info(type, event: .success, description: description)
+    func success(_ type: LocationInfoType, location: CLLocationCoordinate2D, description: String) {
+        let info = Info(type, event: .success, location: location, description: description)
         delegate?.manager(self, didUpdateInfo: info)
     }
 
@@ -136,7 +138,7 @@ class Manager: NSObject, StandardDelegate, VisitMonitoringDelegate {
         let managerInfoStr = getManagerInfoStr(manager)
         let description = "**location info**\n\(locationInfoStr)\n**manager info**\n\(managerInfoStr)"
 
-        success(.standard, description: description)
+        success(.standard, location: manager.location!.coordinate, description: description)
     }
 
     func standard(_ standard: Standard, manager: CLLocationManager, didFailWithError error: Error) {
@@ -148,7 +150,7 @@ class Manager: NSObject, StandardDelegate, VisitMonitoringDelegate {
         let managerInfoStr = getManagerInfoStr(manager)
         let description = "**visit info**\n\(visitInfoStr)\n**manager info**\n\(managerInfoStr)"
 
-        success(.visit, description: description)
+        success(.visit, location: visit.coordinate, description: description)
     }
 
     private func getManagerInfoStr(_ manager: CLLocationManager) -> String {
