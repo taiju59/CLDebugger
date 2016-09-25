@@ -15,6 +15,7 @@
 		ED14FE4D1D94DA3F006455AB /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED14FE4B1D94DA3F006455AB /* RealmSwift.framework */; };
 		ED2E6BE71D97F482005AF3A5 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E6BE61D97F482005AF3A5 /* InfoCell.swift */; };
 		ED2E6BE91D97F852005AF3A5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2E6BE81D97F852005AF3A5 /* MapKit.framework */; };
+		ED2E6BEB1D981A8A005AF3A5 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E6BEA1D981A8A005AF3A5 /* DetailViewController.swift */; };
 		EDBFB4821D94D1F0004D9128 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFB4811D94D1F0004D9128 /* AppDelegate.swift */; };
 		EDBFB4841D94D1F0004D9128 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFB4831D94D1F0004D9128 /* ViewController.swift */; };
 		EDBFB4871D94D1F0004D9128 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBFB4851D94D1F0004D9128 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 		ED14FE4B1D94DA3F006455AB /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		ED2E6BE61D97F482005AF3A5 /* InfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		ED2E6BE81D97F852005AF3A5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		ED2E6BEA1D981A8A005AF3A5 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		EDBFB47E1D94D1F0004D9128 /* CLDebugger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLDebugger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBFB4811D94D1F0004D9128 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDBFB4831D94D1F0004D9128 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				EDBFB4831D94D1F0004D9128 /* ViewController.swift */,
+				ED2E6BEA1D981A8A005AF3A5 /* DetailViewController.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				ED0BDD891D951AD500366F17 /* Prefix.swift in Sources */,
 				EDCC484F1D96466F006A4820 /* VisitMonitoring.swift in Sources */,
 				ED2E6BE71D97F482005AF3A5 /* InfoCell.swift in Sources */,
+				ED2E6BEB1D981A8A005AF3A5 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

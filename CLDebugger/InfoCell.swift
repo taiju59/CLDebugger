@@ -8,11 +8,22 @@
 
 import UIKit
 
+protocol InfoCellDelegate: class {
+    func infoCell(_ infoCell: InfoCell, didTapInfoButton info: Info)
+}
+
 class InfoCell: UITableViewCell {
 
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var infoButton: UIButton!
+
+    weak var delegate: InfoCellDelegate?
+
+    var cellInfo: Info!
 
     func setUp(_ info: Info, num: Int) -> Self {
+
+        cellInfo = info
 
         switch info.event {
         case .success:
@@ -39,5 +50,8 @@ class InfoCell: UITableViewCell {
         label.attributedText = attrText
 
         return self
+    }
+    @IBAction func didTapInfoButton(_ sender: UIButton) {
+        delegate?.infoCell(self, didTapInfoButton: cellInfo)
     }
 }

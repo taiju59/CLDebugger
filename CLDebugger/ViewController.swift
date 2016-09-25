@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ManagerDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ManagerDelegate, InfoCellDelegate {
 
     private var infoArray = [Info]()
 
@@ -46,6 +46,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "InfoCell") as! InfoCell
+        cell.delegate = self
+
         let info = infoArray[indexPath.row]
         let num = infoArray.count - indexPath.row
 
@@ -62,6 +64,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBAction func deleteAll(_ sender: UIBarButtonItem) {
         infoArray = []
         tableView.reloadData()
+    }
+
+    func infoCell(_ infoCell: InfoCell, didTapInfoButton info: Info) {
+        performSegue(withIdentifier: "toDetail", sender: info)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if segue.identifier == "toDetail" {
+            let vc = segue.destination as! DetailViewController
+            vc.detailDescription = (sender as! Info).description
+        }
     }
 
     func setLocation(_ location: CLLocationCoordinate2D? = nil) {

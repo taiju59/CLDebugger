@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -29,20 +30,32 @@
                                             <frame key="frameInset" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1z2-Zm-1dx">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1z2-Zm-1dx">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBj-43-P5V">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="22" id="APT-hQ-Re7"/>
+                                                        <constraint firstAttribute="width" constant="22" id="aPm-mT-Ezh"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="didTapInfoButton:" destination="2mX-F0-poq" eventType="touchUpInside" id="wGR-1X-03L"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="1z2-Zm-1dx" firstAttribute="leading" secondItem="dRB-5b-7j0" secondAttribute="leading" constant="8" id="FMx-2j-Jy0"/>
                                                 <constraint firstAttribute="bottom" secondItem="1z2-Zm-1dx" secondAttribute="bottom" constant="8" id="MUv-1Q-g6N"/>
                                                 <constraint firstItem="1z2-Zm-1dx" firstAttribute="top" secondItem="dRB-5b-7j0" secondAttribute="top" constant="8" id="RH8-sJ-irF"/>
-                                                <constraint firstAttribute="trailing" secondItem="1z2-Zm-1dx" secondAttribute="trailing" constant="8" id="r2p-SU-KjE"/>
+                                                <constraint firstItem="UBj-43-P5V" firstAttribute="centerY" secondItem="dRB-5b-7j0" secondAttribute="centerY" id="Zfi-tb-bn7"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="UBj-43-P5V" secondAttribute="trailing" constant="4" id="emD-yT-W4Y"/>
+                                                <constraint firstItem="UBj-43-P5V" firstAttribute="leading" secondItem="1z2-Zm-1dx" secondAttribute="trailing" constant="8" id="mxh-Qq-IWU"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="infoButton" destination="UBj-43-P5V" id="zSa-FK-Fr4"/>
                                             <outlet property="label" destination="1z2-Zm-1dx" id="ilc-xG-f0i"/>
                                         </connections>
                                     </tableViewCell>
@@ -65,6 +78,7 @@
                             <constraint firstItem="SMo-fd-ElM" firstAttribute="leading" secondItem="BE7-RT-7Xw" secondAttribute="leading" id="woN-BI-KkJ"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="x6C-AI-zgs">
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="h2s-RO-xTV">
                             <connections>
@@ -72,14 +86,50 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="SMo-fd-ElM" id="urG-zJ-P4E"/>
                         <outlet property="tableView" destination="mhR-qu-P1H" id="UIS-AV-6Xh"/>
+                        <segue destination="VgH-C5-SmK" kind="show" identifier="toDetail" id="aGs-VY-HYN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lus-fk-8tF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1052" y="45"/>
+            <point key="canvasLocation" x="1052" y="44.527736131934034"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="a8d-pZ-dvb">
+            <objects>
+                <viewController id="VgH-C5-SmK" customClass="DetailViewController" customModule="CLDebugger" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IhU-qg-zQa"/>
+                        <viewControllerLayoutGuide type="bottom" id="Bbv-AJ-LUl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Fen-NI-XkW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="G4t-Zh-l3I">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="G4t-Zh-l3I" secondAttribute="bottom" id="F5A-G7-2PS"/>
+                            <constraint firstItem="G4t-Zh-l3I" firstAttribute="leading" secondItem="Fen-NI-XkW" secondAttribute="leading" id="T1F-8d-n9d"/>
+                            <constraint firstItem="G4t-Zh-l3I" firstAttribute="top" secondItem="Fen-NI-XkW" secondAttribute="top" id="kUf-h9-Eqi"/>
+                            <constraint firstAttribute="trailing" secondItem="G4t-Zh-l3I" secondAttribute="trailing" id="pXy-Sp-hZf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="G4t-Zh-l3I" id="Yy6-7U-Wta"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bjm-4h-u5z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1912.8" y="44.527736131934034"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1Ah-kM-1XD">
