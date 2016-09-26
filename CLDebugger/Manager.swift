@@ -189,7 +189,7 @@ class Manager: NSObject, StandardDelegate, VisitMonitoringDelegate {
         var locationInfo = [String]()
         locationInfo.append("lat: \(location.coordinate.latitude)")
         locationInfo.append("lon: \(location.coordinate.longitude)")
-        locationInfo.append("timestamp: \(location.timestamp)")
+        locationInfo.append("timestamp: \(location.timestamp.formatString())")
         locationInfo.append("altitude: \(location.altitude)")
         locationInfo.append("horizontalAccuracy: \(location.horizontalAccuracy)")
 
@@ -200,8 +200,8 @@ class Manager: NSObject, StandardDelegate, VisitMonitoringDelegate {
         var visitInfo = [String]()
         visitInfo.append("lat: \(visit.coordinate.latitude)")
         visitInfo.append("lon: \(visit.coordinate.longitude)")
-        visitInfo.append("arrivalDate: \(visit.arrivalDate)")
-        visitInfo.append("departureDate: \(visit.departureDate)")
+        visitInfo.append("arrivalDate: \(visit.arrivalDate.formatString())")
+        visitInfo.append("departureDate: \(visit.departureDate.formatString())")
         visitInfo.append("horizontalAccuracy: \(visit.horizontalAccuracy)")
 
         return visitInfo.joined(separator: "\n")
