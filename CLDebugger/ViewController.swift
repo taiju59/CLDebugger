@@ -8,16 +8,21 @@
 
 import UIKit
 import MapKit
+import RealmSwift
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ManagerDelegate, InfoCellDelegate {
 
-    private var infoArray = [Info]()
+    lazy private var realm = try! Realm()
+    private var infoDataArray: Results<InfoData>!
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mapView: MKMapView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        infoDataArray = realm.objects(InfoData.self).sorted(byProperty: "insertDate", ascending: false)
+
         Manager.sharedInstance.delegate = self
         Manager.sharedInstance.requestAlwaysAuthorization(Prefix.locationInfoType)
         Manager.sharedInstance.start(Prefix.locationInfoType)
@@ -33,14 +38,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func manager(_ manager: Manager, didUpdateInfo info: Info) {
-        infoArray.insert(info, at: 0)
-        tableView.beginUpdates()
-        tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-        tableView.endUpdates()
+        DispatchQueue.main.async {
+            try! self.realm.write {
+                self.realm.add(info.toInfoData())
+            }
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+            self.tableView.endUpdates()
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return infoArray.count
+        return infoDataArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,21 +57,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "InfoCell") as! InfoCell
         cell.delegate = self
 
-        let info = infoArray[indexPath.row]
-        let num = infoArray.count - indexPath.row
+        let info = infoDataArray[indexPath.row].toInfo()
+        let num = infoDataArray.count - indexPath.row
 
         return cell.setUp(info, num: num)
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let info = infoArray[indexPath.row]
+        let info = infoDataArray[indexPath.row].toInfo()
         if let location = info.location {
             setLocation(location)
         }
     }
 
     @IBAction func deleteAll(_ sender: UIBarButtonItem) {
-        infoArray = []
+        try! realm.write {
+            realm.deleteAll()
+        }
         tableView.reloadData()
     }
 

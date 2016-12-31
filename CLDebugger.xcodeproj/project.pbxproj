@@ -17,6 +17,7 @@
 		ED2E6BE91D97F852005AF3A5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2E6BE81D97F852005AF3A5 /* MapKit.framework */; };
 		ED2E6BEB1D981A8A005AF3A5 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E6BEA1D981A8A005AF3A5 /* DetailViewController.swift */; };
 		ED2E6BED1D98D953005AF3A5 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E6BEC1D98D953005AF3A5 /* Utils.swift */; };
+		ED4D8EDA1E1748CB00D0998E /* RLMModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4D8ED91E1748CB00D0998E /* RLMModel.swift */; };
 		EDBFB4821D94D1F0004D9128 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFB4811D94D1F0004D9128 /* AppDelegate.swift */; };
 		EDBFB4841D94D1F0004D9128 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFB4831D94D1F0004D9128 /* ViewController.swift */; };
 		EDBFB4871D94D1F0004D9128 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBFB4851D94D1F0004D9128 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 		ED2E6BE81D97F852005AF3A5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		ED2E6BEA1D981A8A005AF3A5 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		ED2E6BEC1D98D953005AF3A5 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		ED4D8ED91E1748CB00D0998E /* RLMModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMModel.swift; sourceTree = "<group>"; };
 		EDBFB47E1D94D1F0004D9128 /* CLDebugger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLDebugger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBFB4811D94D1F0004D9128 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDBFB4831D94D1F0004D9128 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				ED0BDD881D951AD500366F17 /* Prefix.swift */,
 				EDCC484E1D96466F006A4820 /* VisitMonitoring.swift */,
 				ED2E6BEC1D98D953005AF3A5 /* Utils.swift */,
+				ED4D8ED91E1748CB00D0998E /* RLMModel.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				ED2E6BED1D98D953005AF3A5 /* Utils.swift in Sources */,
 				EDBFB4841D94D1F0004D9128 /* ViewController.swift in Sources */,
 				EDBFB4821D94D1F0004D9128 /* AppDelegate.swift in Sources */,
+				ED4D8EDA1E1748CB00D0998E /* RLMModel.swift in Sources */,
 				ED0BDD891D951AD500366F17 /* Prefix.swift in Sources */,
 				EDCC484F1D96466F006A4820 /* VisitMonitoring.swift in Sources */,
 				ED2E6BE71D97F482005AF3A5 /* InfoCell.swift in Sources */,

@@ -31,6 +31,19 @@ struct Info {
         self.location = location
         self.description = description
     }
+
+    func toInfoData() -> InfoData {
+        let infoData = InfoData()
+        infoData.locationInfoType.value = self.locationInfoType?.rawValue
+        infoData.event = self.event.rawValue
+        if let location = self.location {
+            infoData.latitude.value = location.latitude
+            infoData.longitude.value = location.longitude
+        }
+        infoData.body = self.description
+
+        return infoData
+    }
 }
 
 protocol ManagerDelegate: class {
