@@ -25,11 +25,13 @@ struct Info {
     let event: EventType
     let location: CLLocationCoordinate2D?
     let description: String
-    init(_ locationInfoType: LocationInfoType? = nil, event: EventType, location: CLLocationCoordinate2D? = nil, description: String) {
+    let date: Date
+    init(_ locationInfoType: LocationInfoType? = nil, event: EventType, location: CLLocationCoordinate2D? = nil, description: String, date: Date = Date()) {
         self.locationInfoType = locationInfoType
         self.event = event
         self.location = location
         self.description = description
+        self.date = date
     }
 
     func toInfoData() -> InfoData {

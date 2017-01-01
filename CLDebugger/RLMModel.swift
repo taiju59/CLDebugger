@@ -23,7 +23,8 @@ class InfoData: Object {
             locationInfoType.value == nil ? nil:LocationInfoType(rawValue: locationInfoType.value!),
             event: EventType(rawValue: event)!,
             location: latitude.value == nil ? nil:CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude.value!), longitude: CLLocationDegrees(longitude.value!)),
-            description: body
+            description: body,
+            date: insertDate
         )
     }
 }

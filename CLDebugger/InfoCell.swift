@@ -35,7 +35,7 @@ class InfoCell: UITableViewCell {
         }
 
         let indexString = String(format: "%03d", num)
-        let dateString = Date().formatString()
+        let dateString = info.date.formatString()
 
         let firstLine = "\(indexString): \(dateString)"
         let attrText = NSMutableAttributedString(string: "\(firstLine)\n\(info.description)")
